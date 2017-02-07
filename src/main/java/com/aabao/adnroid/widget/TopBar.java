@@ -1,6 +1,7 @@
 package com.aabao.adnroid.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.ImageView;
@@ -23,6 +24,7 @@ public class TopBar extends RelativeLayout {
     public static final int LEFTID = 1;
     public static final int TITLEID = 2;
     public static final int RIGHTID = 3;
+    private float alpha = 0.8f;
 
     public TopBar(Context context) {
         this(context, null);
@@ -46,6 +48,8 @@ public class TopBar extends RelativeLayout {
 
         mTitleText = new TextView(context);
         mTitleText.setId(TITLEID);
+        mTitleText.setTextColor(getResources().getColor(R.color.topbar_title));
+        mTitleText.setAlpha(alpha);
         mTitleText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.topbar_title_text));
         mTitleText.setText("dddddd");
         RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);

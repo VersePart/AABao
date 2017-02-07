@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/note_layout"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/topbar"/>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="30dp"
+       android:orientation="horizontal"
+       android:background="@color/topbar_background">
+       <FrameLayout
+           android:id="@+id/pay_text"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1">
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:text="@string/pay_case"
+               android:textSize="@dimen/setting_text"
+               android:layout_marginLeft="10dp"/>
+       </FrameLayout>
+       <FrameLayout
+           android:id="@+id/income_text"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1">
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:layout_gravity="center"
+               android:text="@string/income_case"
+               android:textSize="@dimen/setting_text"
+               android:layout_marginLeft="10dp"/>
+       </FrameLayout>
+
+   </LinearLayout>
+    
+   <EditText
+       android:id="@+id/num_money"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:background="@null"
+       android:numeric="decimal"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/back_ground_content"/>
+    <LinearLayout
+        android:id="@+id/format_layout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/classify_note"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/farther_format"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="居家物业"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/note_classify"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp"/>
+            <TextView
+                android:id="@+id/child_format"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="房租"
+                android:layout_marginLeft="5dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/back_ground_content"/>
+    <LinearLayout
+        android:id="@+id/date_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time"/>
+        <TextView
+            android:id="@+id/date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="2017.2.6"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/back_ground_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remark_note"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/back_ground_content"/>
+
+    <TextView
+        android:id="@+id/storage_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/back_ground_content"
+        android:text="@string/storage_note"
+        android:gravity="center"/>
+
+
+</LinearLayout>

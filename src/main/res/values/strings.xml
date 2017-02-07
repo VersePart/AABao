@@ -21,4 +21,41 @@
     <string name="user_is_nothing">用户不存在或密码错误</string>
     <string name="user_is_exist">用户已存在</string>
     <string name="insert_db_failed">创建用户失败</string>
+    <string name="bill_firse">账单一</string>
+    <string name="today_spend">今日花费</string>
+    <string name="average_spend">平均花费</string>
+    <string name="note_spend">记一笔</string>
+    <string name="is_case">今天还没有记过账</string>
+    <string name="text_state_case">今日还没有花费</string>
+    <string name="today_case">今天</string>
+    <string name="this_week">本周</string>
+    <string name="this_month">本月</string>
+    <string name="this_year">本年</string>
+    <string name="about_aabao">关于</string>
+    <string name="pay_case">支出</string>
+    <string name="income_case">收入</string>
+    <string name="classify_note">分类</string>
+    <string name="time">时间</string>
+    <string name="storage_note">保存</string>
+    <string name="remark_note">备注</string>
+    <!--note分类 start-->
+    <string name="food_drink">食物酒水</string>
+
+        <string name="one_day_three">一日三餐</string>
+        <string name="fruit_so_on">水果零食</string>
+
+    <string name="go_go_lang">出去浪</string>
+        <string name="sing_song">嗨歌</string>
+        <string name="go_eat">聚餐</string>
+        <string name="other">其他</string>
+
+    <string name="property">居家物业</string>
+
+        <string name="rent">房租</string>
+        <string name="electric_charge">电费</string>
+        <string name="net_lint">网线</string>
+        <string name="daily_use">日常用品</string>
+    <string name="import_money">请输入金额</string>
+
+    <!--note分类 end-->
 </resources>
