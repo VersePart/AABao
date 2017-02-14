@@ -1,5 +1,6 @@
 package com.aabao.adnroid;
 
+import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -26,9 +27,12 @@ import com.aabao.adnroid.base.BaseActivity;
 import com.aabao.adnroid.datapicker.JudgeDate;
 import com.aabao.adnroid.datapicker.ScreenInfo;
 import com.aabao.adnroid.datapicker.WheelMain;
+import com.aabao.adnroid.db.AADataBaseManager;
+import com.aabao.adnroid.db.BillDataBaseHelper;
 import com.aabao.adnroid.widget.TopBar;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -49,6 +53,8 @@ public class NoteActivity extends BaseActivity {
     private int[] mClassifyItemO = new int[]{ R.string.rent, R.string.electric_charge, R.string.net_lint, R.string.daily_use};
     private int[] mClassifyItemT = new int[]{ R.string.one_day_three, R.string.fruit_so_on};
     private int[] mClassifyItemthree = new int[]{ R.string.sing_song, R.string.go_eat, R.string.other};
+    @Bind(R.id.user)
+    EditText mUser;
     @Bind(R.id.pay_text)
     FrameLayout mPayText;
     @Bind(R.id.income_text)
@@ -65,6 +71,8 @@ public class NoteActivity extends BaseActivity {
     TextView mFartherFormat;
     @Bind(R.id.child_format)
     TextView mChildFormat;
+    @Bind(R.id.storage_query)
+    TextView mStorageQuery;
     WheelMain wheelMain;
     private String txttime;
     private PopupWindow mPopupWindow;
@@ -72,6 +80,7 @@ public class NoteActivity extends BaseActivity {
     private ListView mListView;
     private int mPosition;
     private int mChildPosition;
+    private AADataBaseManager mDBManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +132,8 @@ public class NoteActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.pay_text, R.id.income_text, R.id.date_layout , R.id.farther_format, R.id.child_format, R.id.storage_text})
+    @OnClick({R.id.pay_text, R.id.income_text, R.id.date_layout , R.id.farther_format, R.id.child_format, R.id.storage_text
+    , R.id.storage_query})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.pay_text:
@@ -145,11 +155,15 @@ public class NoteActivity extends BaseActivity {
                 break;
             case R.id.storage_text:
                 //保存数据
+                String user = mUser.getText().toString();
                 String money = mNumMoney.getText().toString();
-                if (money.equals("")){
+                if (money.equals("") || user.equals("")){
                     Toast.makeText(getApplicationContext(), getString(R.string.import_money), Toast.LENGTH_SHORT).show();
                     return;
                 }
+//                DecimalFormat df = new DecimalFormat(".00");
+//                money = df.format(Float.parseFloat(money));
+                Log.i(TAG, "  NoteActivity money = "+money);
                 String fartherClass = getResources().getString(mClassify[mPosition]);
                 String childClass;
                 if (mPosition == 0){
@@ -160,7 +174,26 @@ public class NoteActivity extends BaseActivity {
                     childClass = getResources().getString(mClassifyItemthree[mChildPosition]);
                 }
                 String timeDate = mDateTime.getText().toString();
-                Toast.makeText(getApplicationContext(), "保存成功", Toast.LENGTH_SHORT).show();
+                if (mDBManager == null){
+                    mDBManager = new AADataBaseManager(getApplicationContext());
+                }
+                boolean inInset = mDBManager.add(user, money, fartherClass, childClass, timeDate, null, null);
+                Log.i(TAG, "   inInset = "+inInset);
+//                Toast.makeText(getApplicationContext(), "保存成功", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.storage_query:
+                if (mDBManager == null){
+                    mDBManager = new AADataBaseManager(getApplicationContext());
+                }
+                Cursor cursor = mDBManager.query(BillDataBaseHelper.USER_TABLE, "_id desc");
+                if (cursor == null){
+                    Log.e(TAG, "cursor == null  maybe db has no database");
+                    return;
+                }
+                while (cursor.moveToNext()){
+                    String name = cursor.getString(1);
+                    Log.i(TAG, " query  name = "+name);
+                }
                 break;
         }
     }

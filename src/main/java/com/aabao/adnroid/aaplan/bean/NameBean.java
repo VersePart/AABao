@@ -1,5 +1,6 @@
 package com.aabao.adnroid.aaplan.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,21 +9,35 @@ import java.util.List;
  * email: versepartwang@163.com
  */
 
-public class NameBean {
+public class NameBean implements Serializable {
 
     private String mName;
     private float mMoney;
     private float mToX;
     private float mGetX;
+    private String mDate;
+    private String mFartherClass;
+    private String mChildClass;
+    private String mRemark;
+
+    private float mTotalMoney;
     private List<String> mAANames = new ArrayList<String>();
     private List<Float> mAAMoneys = new ArrayList<Float>();
     //真为给别人钱，假为得到钱
     private boolean toOrGet;
 
-    public NameBean(String name, float money){
+    public NameBean(String name){
         this.mName = name;
-        this.mMoney = money;
     }
+
+//    public NameBean(String name, float money, String date, String fartherClass, String childClass, String remark){
+//        this.mName = name;
+//        this.mMoney = money;
+//        this.mDate = date;
+//        this.mFartherClass = fartherClass;
+//        this.mChildClass = childClass;
+//        this.mRemark = remark;
+//    }
 
     public float getmMoney() {
         return mMoney;
@@ -81,6 +96,46 @@ public class NameBean {
         this.mAAMoneys.add(mAAMoneys);
     }
 
+    public String getmDate() {
+        return mDate;
+    }
+
+    public void setmDate(String mDate) {
+        this.mDate = mDate;
+    }
+
+    public String getmFartherClass() {
+        return mFartherClass;
+    }
+
+    public void setmFartherClass(String mFartherClass) {
+        this.mFartherClass = mFartherClass;
+    }
+
+    public String getmChildClass() {
+        return mChildClass;
+    }
+
+    public void setmChildClass(String mChildClass) {
+        this.mChildClass = mChildClass;
+    }
+
+    public String getmRemark() {
+        return mRemark;
+    }
+
+    public void setmRemark(String mRemark) {
+        this.mRemark = mRemark;
+    }
+
+    public float getmTotalMoney() {
+        return mTotalMoney;
+    }
+
+    public void setmTotalMoney(float mTotalMoney) {
+        this.mTotalMoney = mTotalMoney;
+    }
+
     @Override
     public String toString() {
         return "NameBean{" +
@@ -88,6 +143,11 @@ public class NameBean {
                 ", mMoney=" + mMoney +
                 ", mToX=" + mToX +
                 ", mGetX=" + mGetX +
+                ", mDate='" + mDate + '\'' +
+                ", mFartherClass='" + mFartherClass + '\'' +
+                ", mChildClass='" + mChildClass + '\'' +
+                ", mRemark='" + mRemark + '\'' +
+                ", mTotalMoney=" + mTotalMoney +
                 ", mAANames=" + mAANames +
                 ", mAAMoneys=" + mAAMoneys +
                 ", toOrGet=" + toOrGet +

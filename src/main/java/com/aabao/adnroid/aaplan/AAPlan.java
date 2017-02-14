@@ -1,5 +1,7 @@
 package com.aabao.adnroid.aaplan;
 
+import android.util.Log;
+
 import com.aabao.adnroid.aaplan.bean.NameBean;
 
 import java.text.DecimalFormat;
@@ -17,42 +19,23 @@ import java.util.List;
 
 public class AAPlan {
 
-    int mAverageMin;
-    int mAverageMax;
+    private static final String TAG = "AAPlan";
+    float mAverageMin;
+    float mAverageMax = -1f;
     int mAverageTo = -1;
     int mAverageFrom;
 
-    List<NameBean> mList = new ArrayList<NameBean>();
+    public AAPlan(){
 
-    List <Float> mListCount = new ArrayList<Float>();
-    float[] mCount = new float[5];
-    private static final float CON = (float)2.5;
-
-    public void showAA(){
-        if (mList != null)
-            mList.clear();
-        if (mListCount != null)
-            mListCount.clear();
-        for (int a = 0; a < mCount.length; a++){
-            NameBean bean = new NameBean(a+"", CON + (float)a);
-            mList.add(bean);
-        }
-        mList.add(new NameBean("ddad", 110f));
-        compareNumber(mList);
-
-        for (int c = 0; c < mList.size(); c++){
-            NameBean bean = mList.get(c);
-            System.out.println("222222  bean =" +bean.toString());
-        }
     }
 
-    public void compareNumber (List<NameBean> list){
+    public List<NameBean> compareAccount (List<NameBean> list){
         float totalMoney = 0f;
         float averageMoney = 0f;
         NameBean nameBean = null;
         for (int a = 0; a < list.size(); a++){
             nameBean = list.get(a);
-            totalMoney += nameBean.getmMoney();
+            totalMoney += nameBean.getmTotalMoney();
         }
         DecimalFormat df = new DecimalFormat("#.##");
         averageMoney = totalMoney / list.size();
@@ -62,9 +45,9 @@ public class AAPlan {
 
             @Override
             public int compare(NameBean o1, NameBean o2) {
-                if (o1.getmMoney() > o2.getmMoney())
+                if (o1.getmTotalMoney() > o2.getmTotalMoney())
                     return 1;
-                if (o1.getmMoney() < o2.getmMoney())
+                if (o1.getmTotalMoney() < o2.getmTotalMoney())
                     return -1;
                 return 0;
             }
@@ -74,7 +57,8 @@ public class AAPlan {
         averagePosition(list, averageMoney);
 
         //计算每人该给谁多少钱
-        toBMoneyA(list, averageMoney);
+        List<NameBean> okList = toBMoneyA(list, averageMoney);
+        return okList;
     }
 
     /**
@@ -86,15 +70,15 @@ public class AAPlan {
 
         for (int a = 0; a < list.size(); a++){
             NameBean nameBean = list.get(a);
-            float money = nameBean.getmMoney();
+            float money = nameBean.getmTotalMoney();
             if (money < averageMoney)
-                mAverageMin = a;
+                mAverageMin = (float)a + 0.5f;
             if (money == averageMoney)
                 mAverageTo = a;
             if (money == averageMoney && mAverageTo != 0)
                 mAverageFrom = a;
-            if (money > averageMoney)
-                mAverageMax = a;
+            if (money > averageMoney && mAverageMax == -1f)
+                mAverageMax = (float)a - 0.5f;
         }
     }
 
@@ -102,10 +86,7 @@ public class AAPlan {
 //    int mAverageMax;
 //    int mAverageTo = -1;
 //    int mAverageFrom;
-    private void toBMoneyA(List<NameBean> list, float averageMoney) {
-
-        // mAverageMax = mAverageMin + 1
-//        if (mAverageTo == -1){
+    private List<NameBean> toBMoneyA(List<NameBean> list, float averageMoney) {
         int a = 0;
         int b = list.size() - 1;
         float saveData = 0f;
@@ -113,8 +94,10 @@ public class AAPlan {
         boolean get = false;
         NameBean toXBean;
         NameBean getXBean;
-        while (a < (mAverageMin + 1)){
-            System.out.println("     a = "+a +"   b = "+b + "   lise.size = "+list.size());
+        DecimalFormat df = new DecimalFormat(".00");
+
+        while (a < mAverageMin && b > mAverageMax){
+            Log.i(TAG, "     a = "+a +"   b = "+b + "   lise.size = "+list.size());
             float toX = 0f;
             float getX = 0f;
             float compareMoney = 0f;
@@ -123,66 +106,70 @@ public class AAPlan {
             getXBean = list.get(b);
             getXBean.setToOrGet(false);
 
+            Log.i(TAG, "    saveData = "+saveData + "  averageMoney = "+averageMoney + " mAverageMin = "+mAverageMin
+            + " mAverageMax = "+mAverageMax);
             if (to == true && get == true){
-                toX = toXBean.getmMoney() - averageMoney;
-                getX = getXBean.getmMoney() - averageMoney;
+                toX = toXBean.getmTotalMoney() - averageMoney;
+                getX = getXBean.getmTotalMoney() - averageMoney;
 //                    compareMoney = getX + toX;
             } else if (to == true && get == false){
                 toX = saveData;
-                getX = toXBean.getmMoney() - averageMoney;
-//                    compareMoney = getX + toX;
+                getX = getXBean.getmTotalMoney() - averageMoney;
             } else if (to == false && get == true){
-                toX = toXBean.getmMoney() - averageMoney;
+                toX = toXBean.getmTotalMoney() - averageMoney;
                 getX = saveData;
-//                    compareMoney = getX + toX;
             } else if (to == false && get == false){
-                toX = toXBean.getmMoney() - averageMoney;
-                getX = getXBean.getmMoney() - averageMoney;
-//                    compareMoney = getX + toX;
+                toX = toXBean.getmTotalMoney() - averageMoney;
+                getX = getXBean.getmTotalMoney() - averageMoney;
             }
             compareMoney = getX + toX;
-
+            String strCompareMoney = df.format(compareMoney);
+            String strGetX = df.format(getX);
+            String strToX = df.format(toX);
+            compareMoney = Float.parseFloat(strCompareMoney);
+            getX = Float.parseFloat(strGetX);
+            toX = Float.parseFloat(strToX);
+            Log.i(TAG, "  toX = "+toX+"  getX = "+getX);
             if (compareMoney > 0){
                 toXBean.setmAANames(getXBean.getmName());
                 toXBean.setmAAMoneys(Math.abs(toX));
 
                 getXBean.setmAANames(toXBean.getmName());
-                getXBean.setmAAMoneys(toX);
+                getXBean.setmAAMoneys(Math.abs(toX));
                 saveData = compareMoney;
                 get = true;
                 to = false;
                 a++;
                 System.out.println("  compareMoney > 0  ");
-                continue;
+//                continue;
             } else if (compareMoney < 0){
                 toXBean.setmAANames(getXBean.getmName());
-                toXBean.setmAAMoneys(getX);
+                toXBean.setmAAMoneys(Math.abs(getX));
 
                 getXBean.setmAANames(toXBean.getmName());
-                getXBean.setmAAMoneys(getX);
+                getXBean.setmAAMoneys(Math.abs(getX));
                 saveData = compareMoney;
                 get = false;
                 to = true;
                 b--;
                 System.out.println(" 22222222 compareMoney < 0  ");
-                continue;
+//                continue;
             } else {
                 toXBean.setmAANames(getXBean.getmName());
-                toXBean.setmAAMoneys(getX);
+                toXBean.setmAAMoneys(Math.abs(getX));
 
                 getXBean.setmAANames(toXBean.getmName());
-                getXBean.setmAAMoneys(getX);
+                getXBean.setmAAMoneys(Math.abs(getX));
                 saveData = compareMoney;
                 get = true;
                 to = true;
                 a++;
                 b--;
                 System.out.println("  else  ");
-                continue;
+//                continue;
             }
+            continue;
         }
-//        } else {
-//
-//        }
+        return list;
     }
 }

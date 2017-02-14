@@ -12,7 +12,7 @@
     <SeekBar
         android:id="@+id/seekBar2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_margin="8dp"
@@ -24,7 +24,7 @@
     <SeekBar
         android:id="@+id/seekBar1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_above="@+id/seekBar2"
         android:layout_margin="8dp"
         android:layout_marginBottom="35dp"
@@ -36,7 +36,7 @@
     <TextView
         android:id="@+id/tvXMax"
         android:layout_width="50dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_alignBottom="@+id/seekBar1"
         android:layout_alignParentRight="true"
         android:text="500"
@@ -48,7 +48,7 @@
     <TextView
         android:id="@+id/tvYMax"
         android:layout_width="50dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_alignBottom="@+id/seekBar2"
         android:layout_alignParentRight="true"
         android:text="500"
@@ -56,5 +56,29 @@
         android:layout_marginRight="10dp"
         android:gravity="right"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/detail"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/context_selector"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:text="@string/detail"/>
+
+    <TextView
+        android:id="@+id/clean"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="清除"/>
+
+    <TextView
+        android:id="@+id/inset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/clean"
+        android:text="插入"/>
 
 </RelativeLayout>

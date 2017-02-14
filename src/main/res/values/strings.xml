@@ -56,6 +56,18 @@
         <string name="net_lint">网线</string>
         <string name="daily_use">日常用品</string>
     <string name="import_money">请输入金额</string>
+    <string name="by_user">花费者</string>
+    <string name="sum_money">金额</string>
+    <string name="settle_accounts">结算</string>
+    <string name="has_no_account">还没有创建账单或刚算清</string>
+    <string name="detail">详细</string>
+    <string name="lately_case">最近花费:</string>
+    <string name="lase_date">最后花费时间</string>
+    <string name="yuan">元</string>
+    <string name="caculate_complete">结算完成</string>
+    <string name="give">给</string>
+    <string name="cong">从</string>
+    <string name="give_it">得到</string>
 
     <!--note分类 end-->
 </resources>

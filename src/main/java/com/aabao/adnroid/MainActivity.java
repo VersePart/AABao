@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 
@@ -50,6 +51,9 @@ public class MainActivity extends FragmentActivity {
         mBaseFragmentList.add(new SettingFragment());
 
         mTopbar = (TopBar) findViewById(R.id.topbar);
+        mTopbar.mLeftImageButton.setVisibility(View.INVISIBLE);
+        mTopbar.mRightImageButton.setVisibility(View.INVISIBLE);
+        mTopbar.mTitleText.setText(R.string.my_main);
         mFrameLayout = (FrameLayout) findViewById(R.id.frame_layout);
         mRadioGroup = (RadioGroup) findViewById(R.id.radio_group);
         mRadioGroup.check(R.id.button_1);
@@ -71,17 +75,22 @@ public class MainActivity extends FragmentActivity {
 
                 case R.id.button_1:
                     mPosition = 0;
+                    mTopbar.mTitleText.setText(R.string.my_main);
                     break;
                 case R.id.button_2:
+                    mTopbar.mTitleText.setText(R.string.my_mp);
                     mPosition = 1;
                     break;
                 case R.id.button_3:
+                    mTopbar.mTitleText.setText(R.string.my_expand);
                     mPosition = 2;
                     break;
                 case R.id.button_4:
+                    mTopbar.mTitleText.setText(R.string.settings);
                     mPosition = 3;
                     break;
                 default:
+                    mTopbar.mTitleText.setText(R.string.my_main);
                     mPosition = 0;
                     break;
             }

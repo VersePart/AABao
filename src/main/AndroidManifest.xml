@@ -16,6 +16,8 @@
         <activity android:name=".AboutActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".NoteActivity"/>
+        <activity android:name=".AccountDetailActivity"/>
+        <activity android:name=".CaculateMoneyActivity"/>
     </application>
 
 </manifest>

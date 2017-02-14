@@ -40,13 +40,43 @@
        </FrameLayout>
 
    </LinearLayout>
-    
-   <EditText
-       android:id="@+id/num_money"
-       android:layout_width="match_parent"
-       android:layout_height="50dp"
-       android:background="@null"
-       android:numeric="decimal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/by_user"/>
+        <EditText
+            android:id="@+id/user"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/back_ground_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sum_money"/>
+        <EditText
+            android:id="@+id/num_money"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:numeric="decimal"/>
+    </LinearLayout>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -144,6 +174,19 @@
         android:layout_height="50dp"
         android:background="@color/back_ground_content"
         android:text="@string/storage_note"
+        android:gravity="center"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/back_ground_content"/>
+
+    <TextView
+        android:id="@+id/storage_query"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/back_ground_content"
+        android:text="查询"
         android:gravity="center"/>
 
 
